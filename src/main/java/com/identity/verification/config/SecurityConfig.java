@@ -23,7 +23,13 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/admin/login",
                                 "/api/admin/register",
-                                "api/verify/register"
+                                "/api/verify/register",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/swagger-resources/**",
+                                "/configuration/**",
+                                "/webjars/**"
                         ).permitAll()
                         .requestMatchers("/api/admin/users/**")
                         .hasRole("ADMIN")
@@ -31,7 +37,6 @@ public class SecurityConfig {
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 
